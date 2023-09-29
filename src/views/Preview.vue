@@ -2,8 +2,8 @@
   <div class="main">
     <div class="owner">
       <h2>Персональные данные</h2>
-      <span>{{ getOwner.name }}, </span>
-      <span>{{ getOwner.age }} лет</span>
+      <span>{{ getOwnerLocal.name }} <span v-if="showOwner.name">, </span></span>
+      <span>{{ getOwnerLocal.age }} <span v-if="showOwner.age"> лет</span></span>
     </div>
     <div class="kids">
       <div>
@@ -20,12 +20,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   computed: {
+    ...mapGetters(['showOwner']),
     getKids() {
       return JSON.parse(localStorage.getItem('kids'))
     },
-    getOwner() {
+    getOwnerLocal() {
       return JSON.parse(localStorage.getItem('owner'))
     },
   },
